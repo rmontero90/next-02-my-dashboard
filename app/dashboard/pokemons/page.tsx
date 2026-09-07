@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { PokemonsResponse } from "./interfaces/pokemon-responses";
-import type { SimplePokemon } from "./interfaces/simple-pokemon";
+import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/pokemons";
 
 const getPokemons = async (
   limit = 20,
@@ -15,6 +13,8 @@ const getPokemons = async (
     name: pokemon.name,
   }));
 
+  // throw new Error("Error desconocido. ");
+
   return pokemons;
 };
 
@@ -23,19 +23,9 @@ export default async function PokemonsPage() {
   return (
     <>
       <div className="flex flex-col">
+        <span className="text-4xl my-2">Pokemon List</span>
         <div className="flex flex-wrap gap-10 items-center justify-center">
-          {pokemons.map(({ id, name }) => (
-            <div key={`${id}-${name}`} className={`pokemon pokemon-${id}`}>
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
-                width={100}
-                height={100}
-                alt={name}
-                loading="eager"
-              />
-              <span>{name}</span>
-            </div>
-          ))}
+          <PokemonGrid pokemons={pokemons} />
         </div>
       </div>
     </>
