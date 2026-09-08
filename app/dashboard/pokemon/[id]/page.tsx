@@ -1,6 +1,7 @@
 import { Pokemon } from "@/pokemons";
 import { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{
@@ -10,22 +11,31 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const { id: pokemonId, name } = await getPokemon(id);
 
-  return {
-    title: `#${pokemonId} - ${name}`,
-    description: "SEO Pokemon Description",
-  };
+  try {
+    const { id: pokemonId, name } = await getPokemon(id);
+    return {
+      title: `#${pokemonId} - ${name}`,
+      description: "SEO Pokemon Description",
+    };
+  } catch (error) {
+    return {
+      title: `Pokemon`,
+      description: "SEO Pokemon Description",
+    };
+  }
 }
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
-  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-    cache: "force-cache",
-  }).then((resp) => resp.json());
+  try {
+    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
+      cache: "force-cache",
+    }).then((resp) => resp.json());
 
-  console.log(pokemon.name);
-
-  return pokemon;
+    return pokemon;
+  } catch (error) {
+    notFound();
+  }
 };
 
 export default async function PokemonPage({ params }: Props) {
@@ -34,7 +44,7 @@ export default async function PokemonPage({ params }: Props) {
 
   return (
     <div className="flex mt-5 flex-col items-center text-slate-800">
-      <div className="relative flex flex-col items-center rounded-[20px] w-[700px] mx-auto bg-white bg-clip-border  shadow-lg  p-3">
+      <div className="relative flex flex-col items-center rounded-[20px] w-175 mx-auto bg-white bg-clip-border  shadow-lg  p-3">
         <div className="mt-2 mb-8 w-full">
           <h1 className="px-2 text-xl font-bold text-slate-700 capitalize">
             #{pokemon.id} {pokemon.name}
