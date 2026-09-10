@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PokemonsPage() {
+  "use cache";
   const pokemons = await getPokemons(151);
   return (
     <>
