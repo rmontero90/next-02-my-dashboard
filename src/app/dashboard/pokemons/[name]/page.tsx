@@ -34,16 +34,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PokemonPage({ params }: Props) {
-  const { name } = await params;
-
   return (
     <Suspense fallback={<Loading />}>
-      <PokemonDetailsContent name={name} />
+      <PokemonDetailsContent params={params} />
     </Suspense>
   );
 }
 
-async function PokemonDetailsContent({ name }: { name: string }) {
+async function PokemonDetailsContent({ params }: Props) {
+  const { name } = await params;
+
   const [pokemon, species] = await Promise.all([
     getPokemon(name),
     getPokemonSpecies(name),
