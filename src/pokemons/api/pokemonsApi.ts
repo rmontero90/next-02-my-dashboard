@@ -30,6 +30,7 @@ export const getPokemon = async (name: string): Promise<Pokemon> => {
 
     return pokemon;
   } catch (error) {
+    console.error({ error });
     notFound();
   }
 };
