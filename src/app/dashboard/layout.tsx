@@ -1,6 +1,4 @@
 import { Sidebar } from "@/components/Sidebar";
-import { Loading } from "@/components/Loading";
-import { Suspense } from "react";
 
 export default function DashboardLayout({
   children,
@@ -12,9 +10,7 @@ export default function DashboardLayout({
       <div className="flex min-w-0">
         {/* Menu */}
         <Sidebar />
-        <Suspense fallback={<Loading />}>
-          <div className="min-w-0 flex-1 text-slate-900">{children}</div>
-        </Suspense>
+        <div className="min-w-0 flex-1 text-slate-900">{children}</div>
       </div>
     </div>
   );
