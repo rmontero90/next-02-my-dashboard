@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { randomInt } from "node:crypto";
 import { PokemonsResponse, SimplePokemon, Pokemon } from "@/pokemons";
 
 export const getPokemons = async (
@@ -19,18 +20,27 @@ export const getPokemons = async (
   return pokemons;
 };
 
-export const getPokemon = async (name: string): Promise<Pokemon> => {
-  try {
-    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
-      // cache: "force-cache",
-      next: {
-        revalidate: 60 * 60 * 30 * 6,
-      },
-    }).then((resp) => resp.json());
+export const getRandomPokemons = async (
+  limit = 20,
+  total = 151,
+): Promise<SimplePokemon[]> => {
+  const maxOffset = total - limit;
+  const offset = randomInt(0, maxOffset + 1);
 
-    return pokemon;
-  } catch (error) {
-    console.error({ error });
+  return getPokemons(limit, offset);
+};
+
+export const getPokemon = async (name: string): Promise<Pokemon> => {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
+    // cache: "force-cache",
+    next: {
+      revalidate: 60 * 60 * 30 * 6,
+    },
+  });
+
+  if (!response.ok) {
     notFound();
   }
+
+  return response.json();
 };

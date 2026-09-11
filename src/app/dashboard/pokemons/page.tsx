@@ -1,33 +1,28 @@
-import { PokemonGrid, getPokemons } from "@/pokemons";
+import { RandomPokemonList } from "@/pokemons";
 import { Metadata } from "next";
-import { cacheLife } from "next/cache";
+import { Suspense } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
     return {
-      title: `151 Pokemons`,
+      title: "Pokemons",
       description: "SEO Pokemon List",
     };
   } catch (error) {
     return {
-      title: `151 Pokemons`,
+      title: "Pokemons",
       description: "SEO Pokemon Description",
     };
   }
 }
 
-export default async function PokemonsPage() {
-  "use cache";
-  cacheLife("weeks");
-  const pokemons = await getPokemons(151);
+export default function PokemonsPage() {
   return (
-    <>
-      <div className="flex flex-col">
-        <span className="text-4xl my-2">Pokemon List</span>
-        <div className="flex flex-wrap gap-10 items-center justify-center">
-          <PokemonGrid pokemons={pokemons} />
-        </div>
-      </div>
-    </>
+    <div className="flex flex-col">
+      <span className="text-4xl my-2">Pokemon List</span>
+      <Suspense fallback={<div>Loading...</div>}>
+        <RandomPokemonList />
+      </Suspense>
+    </div>
   );
 }

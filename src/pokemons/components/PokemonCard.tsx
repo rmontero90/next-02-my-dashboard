@@ -5,9 +5,10 @@ import { IoHeartOutline } from "react-icons/io5";
 
 interface Props {
   pokemon: SimplePokemon;
+  isFirst?: boolean;
 }
 
-export const PokemonCard = ({ pokemon }: Props) => {
+export const PokemonCard = ({ pokemon, isFirst = false }: Props) => {
   const { name } = pokemon;
 
   return (
@@ -20,7 +21,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
             width={100}
             height={100}
             alt={pokemon.name}
-            priority={false}
+            loading={isFirst ? "eager" : "lazy"}
           />
           <p className="pt-2 text-lg font-semibold text-gray-50 capitalize">
             {name}

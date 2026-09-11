@@ -8,8 +8,12 @@ interface Props {
 export const PokemonGrid = ({ pokemons }: Props) => {
   return (
     <>
-      {pokemons.map((pokemon) => (
-        <PokemonCard key={`${pokemon.id}-${pokemon.name}`} pokemon={pokemon} />
+      {pokemons.map((pokemon, index) => (
+        <PokemonCard
+          key={`${pokemon.id}-${pokemon.name}`}
+          pokemon={pokemon}
+          isFirst={index === 0}
+        />
       ))}
     </>
   );
