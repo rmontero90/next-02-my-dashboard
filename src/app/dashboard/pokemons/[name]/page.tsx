@@ -1,14 +1,14 @@
 import { getPokemon, getPokemonSpecies, getPokemons } from "@/pokemons";
 import { PokemonDetails } from "@/pokemons/components/PokemonDetails";
-import { Loading } from "@/components/Loading";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 interface Props {
   params: Promise<{
     name: string;
   }>;
 }
+
+export const instant = false;
 
 export async function generateStaticParams() {
   const staticPokemons = await getPokemons(151);
@@ -34,14 +34,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PokemonPage({ params }: Props) {
-  return (
-    <Suspense fallback={<Loading />}>
-      <PokemonDetailsContent params={params} />
-    </Suspense>
-  );
-}
-
-async function PokemonDetailsContent({ params }: Props) {
   const { name } = await params;
 
   const [pokemon, species] = await Promise.all([

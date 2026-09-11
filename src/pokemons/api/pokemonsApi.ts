@@ -11,9 +11,15 @@ export const getPokemons = async (
   limit = 20,
   offset = 0,
 ): Promise<SimplePokemon[]> => {
-  const data: PokemonsResponse = await fetch(
+  const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
-  ).then((res) => res.json());
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch pokemons: ${response.status}`);
+  }
+
+  const data: PokemonsResponse = await response.json();
 
   const pokemons = data.results.map((pokemon) => ({
     id: pokemon.url.split("/").at(-2)!,
