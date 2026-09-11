@@ -1,4 +1,4 @@
-import { getPokemon, getPokemons } from "@/pokemons";
+import { getPokemon, getPokemonSpecies, getPokemons } from "@/pokemons";
 import { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -43,7 +43,18 @@ export default async function PokemonPage({ params }: Props) {
 }
 
 async function PokemonDetailsContent({ name }: { name: string }) {
-  const pokemon = await getPokemon(name);
+  const [pokemon, species] = await Promise.all([
+    getPokemon(name),
+    getPokemonSpecies(name),
+  ]);
+  const description =
+    species.flavor_text_entries
+      .find((entry) => entry.language.name === "en")
+      ?.flavor_text.replace(/[\f\n]/g, " ") ?? "No description available.";
+  const gender =
+    species.gender_rate === -1
+      ? "Genderless"
+      : `Male ${((8 - species.gender_rate) / 8) * 100}% / Female ${(species.gender_rate / 8) * 100}%`;
 
   return (
     <div className="flex mt-5 flex-col items-center text-slate-800">
@@ -71,6 +82,30 @@ async function PokemonDetailsContent({ name }: { name: string }) {
           </div>
         </div>
         <div className="flex w-full flex-wrap gap-4 px-2">
+          <div className="flex w-full flex-col rounded-2xl bg-white bg-clip-border px-3 py-4 drop-shadow-lg">
+            <p className="text-sm text-gray-600">Description</p>
+            <p className="mt-2 text-base leading-6 text-slate-700">
+              {description}
+            </p>
+          </div>
+
+          <div className="flex w-full flex-col rounded-2xl bg-white bg-clip-border px-3 py-4 drop-shadow-lg md:w-[calc(50%-0.5rem)]">
+            <p className="text-sm text-gray-600">Abilities</p>
+            <ul className="mt-2 text-base text-slate-700">
+              {pokemon.abilities.map(({ ability, is_hidden }) => (
+                <li key={ability?.name} className="capitalize">
+                  {ability?.name}
+                  {is_hidden ? " (hidden)" : ""}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex w-full flex-col rounded-2xl bg-white bg-clip-border px-3 py-4 drop-shadow-lg md:w-[calc(50%-0.5rem)]">
+            <p className="text-sm text-gray-600">Gender</p>
+            <p className="mt-2 text-base text-slate-700">{gender}</p>
+          </div>
+
           <div className="flex w-full flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 drop-shadow-lg md:w-[calc(50%-0.5rem)]">
             <p className="text-sm text-gray-600">Types</p>
             <div className="text-base font-medium text-navy-700 flex">

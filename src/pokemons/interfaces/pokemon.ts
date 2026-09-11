@@ -22,6 +22,16 @@ export interface Pokemon {
   past_types: any[];
 }
 
+export interface PokemonSpecies {
+  gender_rate: number;
+  flavor_text_entries: FlavorTextEntry[];
+}
+
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: Species;
+}
+
 export interface Ability {
   is_hidden: boolean;
   slot: number;

@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import { randomInt } from "node:crypto";
-import { PokemonsResponse, SimplePokemon, Pokemon } from "@/pokemons";
+import {
+  PokemonsResponse,
+  SimplePokemon,
+  Pokemon,
+  PokemonSpecies,
+} from "@/pokemons";
 
 export const getPokemons = async (
   limit = 20,
@@ -35,6 +40,25 @@ export const getPokemon = async (name: string): Promise<Pokemon> => {
       revalidate: 60 * 60 * 30 * 6,
     },
   });
+
+  if (!response.ok) {
+    notFound();
+  }
+
+  return response.json();
+};
+
+export const getPokemonSpecies = async (
+  name: string,
+): Promise<PokemonSpecies> => {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${name}`,
+    {
+      next: {
+        revalidate: 60 * 60 * 30 * 6,
+      },
+    },
+  );
 
   if (!response.ok) {
     notFound();
