@@ -1,4 +1,5 @@
 export { PokemonGrid } from "./components/PokemonGrid";
+export { PokemonDetails } from "./components/PokemonDetails";
 export { RandomPokemonList } from "./components/RandomPokemonList";
 
 export type { PokemonsResponse } from "./interfaces/pokemons-responses";

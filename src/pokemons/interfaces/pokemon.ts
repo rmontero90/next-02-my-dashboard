@@ -10,7 +10,7 @@ export interface Pokemon {
   past_abilities: PastAbility[];
   forms: Species[];
   game_indices: GameIndex[];
-  held_items: any[];
+  held_items: HeldItem[];
   location_area_encounters: string;
   moves: Move[];
   species: Species;
@@ -19,7 +19,7 @@ export interface Pokemon {
   stats: Stat[];
   past_stats: PastStat[];
   types: Type[];
-  past_types: any[];
+  past_types: PastType[];
 }
 
 export interface PokemonSpecies {
@@ -41,6 +41,21 @@ export interface Ability {
 export interface Species {
   name: string;
   url: string;
+}
+
+export interface HeldItem {
+  item: Species;
+  version_details: HeldItemVersionDetail[];
+}
+
+export interface HeldItemVersionDetail {
+  rarity: number;
+  version: Species;
+}
+
+export interface PastType {
+  generation: Species;
+  types: Type[];
 }
 
 export interface Cries {
