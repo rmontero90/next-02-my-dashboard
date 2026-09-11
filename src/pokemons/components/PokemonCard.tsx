@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SimplePokemon } from "../interfaces/simple-pokemon";
-import { IoHeartOutline } from "react-icons/io5";
 
 interface Props {
   pokemon: SimplePokemon;
@@ -15,7 +14,6 @@ export const PokemonCard = ({ pokemon, isFirst = false }: Props) => {
     <div className="mx-auto right-0 mt-2 w-60">
       <div className="flex flex-col bg-white rounded overflow-hidden shadow-lg">
         <div className="flex flex-col justify-center items-center text-center p-6 bg-gray-800 border-b">
-          (
           <Image
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
             width={100}
@@ -34,22 +32,6 @@ export const PokemonCard = ({ pokemon, isFirst = false }: Props) => {
               More info
             </Link>
           </div>
-        </div>
-        <div className="border-b">
-          <Link
-            href="/dashboard/main"
-            className="px-4 py-2 hover:bg-gray-100 flex items-center"
-          >
-            <div className="text-green-600">
-              <IoHeartOutline className="text-red-600" />
-            </div>
-            <div className="pl-3">
-              <p className="text-sm font-medium text-gray-800 leading-none">
-                No Favorite
-              </p>
-              <p className="text-xs text-gray-500">View Info</p>
-            </div>
-          </Link>
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ const menuItems = [
     path: "/dashboard/pokemons",
     icon: <IoFootball size={40} />,
     title: "Pokemons",
-    subTitle: "Static Generation",
   },
 ];
 
@@ -22,7 +21,6 @@ export const Sidebar = () => {
           <IoLogoReact className="m-2" />
           <span className="hidden md:inline">PokeAPI</span>
         </h1>
-        <p className="hidden md:block text-slate-500 text-sm">Static pages</p>
       </div>
       <div id="profile" className="px-2 md:px-6 py-6 md:py-10">
         <p className="hidden md:block text-slate-500">Welcome back,</p>

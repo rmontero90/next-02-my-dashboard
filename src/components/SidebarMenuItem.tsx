@@ -7,10 +7,9 @@ interface Props {
   path: string;
   icon: JSX.Element;
   title: string;
-  subTitle: string;
 }
 
-export const SidebarMenuItem = ({ path, icon, title, subTitle }: Props) => {
+export const SidebarMenuItem = ({ path, icon, title }: Props) => {
   const currentPath = usePathname();
   return (
     <Link
@@ -22,9 +21,6 @@ export const SidebarMenuItem = ({ path, icon, title, subTitle }: Props) => {
       <div>{icon}</div>
       <div className="hidden md:flex flex-col">
         <span className="text-lg font-bold leading-5 text-white">{title}</span>
-        <span className="text-sm text-white/50 hidden md:block">
-          {subTitle}
-        </span>
       </div>
     </Link>
   );
