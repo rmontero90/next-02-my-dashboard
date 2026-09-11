@@ -12,7 +12,7 @@ export const PokemonGrid = ({ pokemons }: Props) => {
         <PokemonCard
           key={`${pokemon.id}-${pokemon.name}`}
           pokemon={pokemon}
-          isFirst={index === 0}
+          isFirst={index < 3}
         />
       ))}
     </>

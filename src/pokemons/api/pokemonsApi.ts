@@ -15,8 +15,6 @@ export const getPokemons = async (
     name: pokemon.name,
   }));
 
-  // throw new Error("Error desconocido. ");
-
   return pokemons;
 };
 
