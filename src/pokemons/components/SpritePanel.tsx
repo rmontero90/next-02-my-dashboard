@@ -9,7 +9,7 @@ interface Props {
 export const SpritePanel = ({ title, images, pokemonName }: Props) => {
   return (
     <div className="flex w-full flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 drop-shadow-lg md:w-[calc(50%-0.5rem)]">
-      <p className="text-sm text-gray-600">{title}</p>
+      <p className="text-sm font-semibold text-slate-700">{title}</p>
       <div className="flex flex-wrap justify-center">
         {images.map((src, index) => (
           <Image

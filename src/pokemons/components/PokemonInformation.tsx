@@ -11,29 +11,34 @@ export const PokemonInformation = ({ pokemon, description, gender }: Props) => {
   return (
     <div className="flex w-full flex-wrap gap-4 px-2">
       <InfoPanel className="w-full">
-        <p className="text-sm text-gray-600">Description</p>
+        <p className="text-sm font-semibold text-slate-700">Description</p>
         <p className="mt-2 text-base leading-6 text-slate-700">{description}</p>
       </InfoPanel>
 
       <InfoPanel>
-        <p className="text-sm text-gray-600">Abilities</p>
-        <ul className="mt-2 text-base text-slate-700">
+        <p className="text-sm font-semibold text-slate-700">Abilities</p>
+        <ul className="mt-2 space-y-2 pl-4 text-base text-slate-700">
           {pokemon.abilities.map(({ ability, is_hidden }) => (
-            <li key={ability?.name} className="capitalize">
-              {ability?.name}
-              {is_hidden ? " (hidden)" : ""}
+            <li
+              key={ability?.name}
+              className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 capitalize"
+            >
+              <span>{ability?.name}</span>
+              <span className="text-right text-xs font-medium tracking-wide text-gray-500 normal-case">
+                {is_hidden ? "Hidden ability" : "Standard ability"}
+              </span>
             </li>
           ))}
         </ul>
       </InfoPanel>
 
       <InfoPanel>
-        <p className="text-sm text-gray-600">Gender</p>
+        <p className="text-sm font-semibold text-slate-700">Gender</p>
         <p className="mt-2 text-base text-slate-700">{gender}</p>
       </InfoPanel>
 
       <InfoPanel>
-        <p className="text-sm text-gray-600">Types</p>
+        <p className="text-sm font-semibold text-slate-700">Types</p>
         <div className="flex text-base font-medium text-navy-700">
           {pokemon.types.map((type) => (
             <p key={type.slot} className="mr-2 capitalize">
@@ -44,7 +49,7 @@ export const PokemonInformation = ({ pokemon, description, gender }: Props) => {
       </InfoPanel>
 
       <InfoPanel>
-        <p className="text-sm text-gray-600">Peso</p>
+        <p className="text-sm font-semibold text-slate-700">Weight</p>
         <span className="flex text-base font-medium text-navy-700">
           {pokemon.weight}
         </span>

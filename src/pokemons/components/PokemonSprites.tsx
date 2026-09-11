@@ -7,7 +7,7 @@ interface Props {
 
 export const PokemonSprites = ({ pokemon }: Props) => {
   return (
-    <div className="flex w-full flex-wrap gap-4 px-2">
+    <div className="flex w-full flex-wrap gap-4 px-2 mt-4">
       <SpritePanel
         title="Regular Sprites"
         images={[pokemon.sprites.front_default, pokemon.sprites.back_default]}
