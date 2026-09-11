@@ -6,10 +6,7 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-import {
-  getPokemon,
-  getPokemons,
-} from "../src/pokemons/api/pokemonsApi";
+import { getPokemon, getPokemons } from "../src/pokemons/api/pokemonsApi";
 
 describe("pokemon API helpers", () => {
   beforeEach(() => {

@@ -1,5 +1,8 @@
 import { Pokemon, PokemonSpecies } from "../interfaces/pokemon";
-import { getGenderLabel, getPokemonDescription } from "../utils/pokemonFormatters";
+import {
+  getGenderLabel,
+  getPokemonDescription,
+} from "../utils/pokemonFormatters";
 import { PokemonHeader } from "./PokemonHeader";
 import { PokemonInformation } from "./PokemonInformation";
 import { PokemonSprites } from "./PokemonSprites";

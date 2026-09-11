@@ -7,11 +7,7 @@ interface Props {
   gender: string;
 }
 
-export const PokemonInformation = ({
-  pokemon,
-  description,
-  gender,
-}: Props) => {
+export const PokemonInformation = ({ pokemon, description, gender }: Props) => {
   return (
     <div className="flex w-full flex-wrap gap-4 px-2">
       <InfoPanel className="w-full">
