@@ -1,4 +1,5 @@
 import { RandomPokemonList } from "@/pokemons";
+import { Loading } from "@/components/Loading";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -20,7 +21,7 @@ export default function PokemonsPage() {
   return (
     <div className="flex flex-col">
       <span className="text-4xl my-2">Pokemon List</span>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <RandomPokemonList />
       </Suspense>
     </div>
