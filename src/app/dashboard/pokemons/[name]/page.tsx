@@ -1,5 +1,6 @@
 import { getPokemon, getPokemonSpecies, getPokemons } from "@/pokemons";
 import { PokemonDetails } from "@/pokemons/components/PokemonDetails";
+import { Loading } from "@/components/Loading";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -36,7 +37,7 @@ export default async function PokemonPage({ params }: Props) {
   const { name } = await params;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <PokemonDetailsContent name={name} />
     </Suspense>
   );
